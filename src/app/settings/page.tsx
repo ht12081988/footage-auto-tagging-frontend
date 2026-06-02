@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 
 interface TargetClass {
-    id: int;
+    id: string;
     name: string;
     is_enabled: boolean;
 }
