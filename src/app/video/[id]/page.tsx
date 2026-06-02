@@ -231,7 +231,7 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
             });
             setShowReprocess(false);
             setLoading(true);
-            setVideo(prev => prev ? { ...prev, status: "processing" } : null);
+            setVideo((prev: any) => prev ? { ...prev, status: "processing" } : null);
         } catch (err) {
             console.error(err);
         } finally {
