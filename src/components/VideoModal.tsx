@@ -58,25 +58,27 @@ export default function VideoModal({ id, initialTime, onClose }: { id: string, i
                 const vidData = await vidRes.json();
                 setVideo(vidData);
                 
-                if (vidData.status === 'completed') {
+                if (vidData.status === 'completed' || vidData.status === 'failed' || vidData.status === 'cancelled') {
                     isDone = true;
                     if (interval) clearInterval(interval);
                     
-                    const [detRes, plateRes, captionRes] = await Promise.all([
-                        fetch(`${API_BASE_URL}/videos/${id}/detections?operator_id=${operatorId}`),
-                        fetch(`${API_BASE_URL}/videos/${id}/plates?operator_id=${operatorId}`),
-                        fetch(`${API_BASE_URL}/videos/${id}/captions?operator_id=${operatorId}`)
-                    ]);
-                    
-                    const [detData, plateData, captionData] = await Promise.all([
-                        detRes.json(),
-                        plateRes.json(),
-                        captionRes.json()
-                    ]);
-                    
-                    setDetections(detData);
-                    setPlates(plateData);
-                    setCaptions(captionData);
+                    if (vidData.status === 'completed') {
+                        const [detRes, plateRes, captionRes] = await Promise.all([
+                            fetch(`${API_BASE_URL}/videos/${id}/detections?operator_id=${operatorId}`),
+                            fetch(`${API_BASE_URL}/videos/${id}/plates?operator_id=${operatorId}`),
+                            fetch(`${API_BASE_URL}/videos/${id}/captions?operator_id=${operatorId}`)
+                        ]);
+                        
+                        const [detData, plateData, captionData] = await Promise.all([
+                            detRes.json(),
+                            plateRes.json(),
+                            captionRes.json()
+                        ]);
+                        
+                        setDetections(detData);
+                        setPlates(plateData);
+                        setCaptions(captionData);
+                    }
                 }
             } catch (err) {
                 console.error(err);

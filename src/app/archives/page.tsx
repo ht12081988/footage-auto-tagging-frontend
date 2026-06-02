@@ -55,9 +55,16 @@ export default function ArchivesPage() {
         }
 
         loadVideos();
+    }, [router]);
+
+    // Only poll the video list if there are active (processing/uploading) videos
+    useEffect(() => {
+        const hasActiveVideos = videos.some(v => v.status === 'processing' || v.status === 'uploading');
+        if (!hasActiveVideos) return;
+
         const interval = setInterval(loadVideos, 5000);
         return () => clearInterval(interval);
-    }, [router]);
+    }, [videos]);
 
 
 
