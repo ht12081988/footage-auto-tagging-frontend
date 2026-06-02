@@ -1,8 +1,18 @@
 "use client";
 
 import { API_BASE_URL } from "@/config";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+
+// Sub-component wrapped in Suspense to isolate useSearchParams() during static export
+function SearchSync({ setSearchQuery }: { setSearchQuery: (q: string) => void }) {
+    const searchParams = useSearchParams();
+    useEffect(() => {
+        const q = searchParams.get('q') || searchParams.get('plate') || "";
+        setSearchQuery(q);
+    }, [searchParams, setSearchQuery]);
+    return null;
+}
 
 export default function Layout({ children, activePage, videoScope }: { children: React.ReactNode, activePage?: 'upload' | 'archives' | 'search' | 'video', videoScope?: any }) {
     const [operator, setOperator] = useState<any>(null);
@@ -15,8 +25,6 @@ export default function Layout({ children, activePage, videoScope }: { children:
     const [showDropdown, setShowDropdown] = useState(false);
     const searchRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
-    const searchParams = useSearchParams();
-
     const [isScopeCleared, setIsScopeCleared] = useState(false);
 
     // Reset scope cleared state if videoScope changes
@@ -26,11 +34,7 @@ export default function Layout({ children, activePage, videoScope }: { children:
 
     const activeVideoScope = isScopeCleared ? null : videoScope;
 
-    // Keep searchQuery synchronized with URL params ('q' or 'plate') when page changes
-    useEffect(() => {
-        const q = searchParams.get('q') || searchParams.get('plate') || "";
-        setSearchQuery(q);
-    }, [searchParams]);
+
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -104,6 +108,9 @@ export default function Layout({ children, activePage, videoScope }: { children:
 
     return (
         <div className="bg-background text-on-surface font-body-base min-h-screen overflow-x-hidden selection:bg-primary/30">
+            <Suspense fallback={null}>
+                <SearchSync setSearchQuery={setSearchQuery} />
+            </Suspense>
             {/* TopAppBar */}
             <header className="bg-surface-container-low/85 backdrop-blur-xl text-primary font-headline-md text-[24px] border-b border-outline-variant/30 shadow-[0_4px_30px_rgba(0,0,0,0.5)] flex justify-between items-center w-full px-margin-desktop h-16 z-50 fixed top-0">
                 <div className="flex items-center gap-4">

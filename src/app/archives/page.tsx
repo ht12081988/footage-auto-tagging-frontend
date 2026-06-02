@@ -2,7 +2,7 @@
 
 import { API_BASE_URL } from "@/config";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Layout from "@/components/Layout";
 
 export default function ArchivesPage() {
@@ -10,7 +10,6 @@ export default function ArchivesPage() {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [videoToDelete, setVideoToDelete] = useState<string | null>(null);
     const router = useRouter();
-    const searchParams = useSearchParams();
 
     const loadVideos = () => {
         const opStr = localStorage.getItem("sentinel_operator");
