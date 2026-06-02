@@ -1,0 +1,285 @@
+.sentinelPage {
+    font-family: 'Inter', sans-serif;
+    background: #0b1326;
+    color: #dae2fd;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.leftPanel {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    border-right: 1px solid rgba(60, 73, 78, 0.3);
+}
+
+@media (min-width: 768px) {
+    .leftPanel {
+        display: block;
+        width: 60%;
+        height: 100vh;
+    }
+}
+
+.leftPanel img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.leftGradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(11,19,38,0.5), rgba(11,19,38,0.1));
+}
+
+.leftMeta {
+    position: absolute;
+    top: 48px;
+    left: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(164, 230, 255, 0.4);
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+}
+
+.leftBrand {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brandIconBox {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: rgba(11,19,38,0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(164,230,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brandName {
+    font-size: 24px;
+    font-weight: 700;
+    color: #a4e6ff;
+    letter-spacing: -0.02em;
+}
+
+.rightPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 24px;
+    background: #060e20;
+    min-height: 100vh;
+}
+
+.rightBgBlur {
+    position: absolute;
+    top: 25%;
+    right: 25%;
+    width: 256px;
+    height: 256px;
+    background: rgba(164,230,255,0.05);
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.rightGrid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
+    background-size: 30px 30px;
+    pointer-events: none;
+}
+
+.loginContainer {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px;
+}
+
+.glassPanel {
+    background: rgba(19, 27, 46, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.glassPanel:hover .scanLine {
+    opacity: 0.4;
+}
+
+.scanLine {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #4cd6ff, transparent);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+    animation: scan 4s linear infinite;
+    transition: opacity 0.3s;
+}
+
+@keyframes scan {
+    0% { top: 0; opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { top: 100%; opacity: 0; }
+}
+
+.cornerBracket {
+    width: 12px;
+    height: 12px;
+    border-color: #4cd6ff;
+    position: absolute;
+}
+
+.cornerTL { top: 0; left: 0; border-top: 2px solid #4cd6ff; border-left: 2px solid #4cd6ff; }
+.cornerTR { top: 0; right: 0; border-top: 2px solid #4cd6ff; border-right: 2px solid #4cd6ff; }
+.cornerBL { bottom: 0; left: 0; border-bottom: 2px solid #4cd6ff; border-left: 2px solid #4cd6ff; }
+.cornerBR { bottom: 0; right: 0; border-bottom: 2px solid #4cd6ff; border-right: 2px solid #4cd6ff; }
+
+.panelTitle {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #a4e6ff;
+    margin: 0 0 8px 0;
+}
+
+.panelSubtitle {
+    font-size: 14px;
+    line-height: 20px;
+    color: #bbc9cf;
+    margin: 0 0 40px 0;
+}
+
+.fieldLabel {
+    font-size: 11px;
+    line-height: 12px;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #bbc9cf;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.fieldLabel .material-symbols-outlined {
+    font-size: 14px;
+}
+
+.loginInput {
+    width: 100%;
+    background: rgba(19,27,46,0.5);
+    border: none;
+    border-bottom: 1px solid #3c494e;
+    color: #dae2fd;
+    padding: 12px 0;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.loginInput::placeholder { color: rgba(187,201,207,0.2); }
+.loginInput:focus { border-bottom-color: #a4e6ff; }
+
+.fieldGroup { margin-bottom: 24px; }
+
+.signInBtn {
+    width: 100%;
+    background: #00d1ff;
+    color: #003543;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+    box-shadow: 0 0 15px rgba(76, 214, 255, 0.2);
+    transition: transform 0.1s, background 0.2s;
+    letter-spacing: 0.01em;
+}
+
+.signInBtn:active { transform: scale(0.98); }
+.signInBtn:hover { background: #4cd6ff; }
+.signInBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.errorMsg {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(147,0,10,0.2);
+    border: 1px solid rgba(147,0,10,0.4);
+    border-radius: 6px;
+    color: #ffb4ab;
+    font-size: 13px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.demoHint {
+    margin-top: 24px;
+    padding: 12px;
+    background: rgba(0, 209, 255, 0.05);
+    border: 1px solid rgba(0, 209, 255, 0.15);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.demoHint p {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(187,201,207,0.6);
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.demoHint span { color: #a4e6ff; }
+
+.bottomMeta {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(187,201,207,0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
