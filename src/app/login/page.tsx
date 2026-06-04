@@ -60,21 +60,11 @@ export default function LoginPage() {
             {/* Left visual panel */}
             <aside className={styles.leftPanel}>
                 <img
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfT-HVT4dJgz3KEKJXaxD_R4UdnYDs9rryQYTIRw0kQeexd610wIGaqTelvx4FSVD7LcKTW53NCbAGz7kl-6jgHoZYdJeoQcqbd1Fqy-catnBmsoqDJJ1NuSt_X3lvj-MFediAbAVzXbzWtTsGPIFcnW4ZYgyZG7KCgGlDAMHZluCc0DTCm3KHruJtCzL9P5ag9EGZeN_dpKWStFiyihN2z8dq9SfmhoxW-kvuqWgukyL81zNpALRKuLjm5wC1Wy-WAWHirAUBVDNq"
+                    src="/vigilant.png"
                     alt="Sentinel AI Server Infrastructure"
                 />
-                <div className={styles.leftGradient} />
-                <div className={styles.leftMeta}>
-                    <p>DATA_LINK: ESTABLISHED</p>
-                    <p>PACKET_LOSS: 0.000%</p>
-                    <p>LATENCY: 12ms</p>
-                </div>
-                <div className={styles.leftBrand}>
-                    <div className={styles.brandIconBox}>
-                        <span className="material-symbols-outlined" style={{ color: "#a4e6ff", fontSize: "28px" }}>security</span>
-                    </div>
-                    <div className={styles.brandName}>SENTINEL AI</div>
-                </div>
+
+
             </aside>
 
             {/* Right login panel */}
@@ -153,12 +143,7 @@ export default function LoginPage() {
                     </div>
                 </div>
 
-                <div className={styles.bottomMeta}>
-                    <span>SENTINEL AI v1.0</span>
-                    {/* time rendered client-side only to avoid hydration mismatch */}
-                    <span suppressHydrationWarning>{time}</span>
-                    <span>ENC: AES-256</span>
-                </div>
+
             </main>
         </div>
     );
