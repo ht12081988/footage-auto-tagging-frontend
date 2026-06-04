@@ -39,12 +39,19 @@ export default function LoginPage() {
                 body: JSON.stringify({ email, password }),
             });
 
+            let data;
+            const text = await res.text();
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                // If the response is not valid JSON, throw a clearer error
+                throw new Error(res.ok ? "Invalid JSON from server" : `Server error (${res.status}): ${text.substring(0, 50)}...`);
+            }
+
             if (!res.ok) {
-                const data = await res.json();
                 throw new Error(data.detail || "Authentication failed.");
             }
 
-            const data = await res.json();
             localStorage.setItem("sentinel_auth", "true");
             localStorage.setItem("sentinel_operator", JSON.stringify(data.operator));
             router.push("/");
@@ -60,7 +67,7 @@ export default function LoginPage() {
             {/* Left visual panel */}
             <aside className={styles.leftPanel}>
                 <img
-                    src="/vigilant.png"
+                    src="/Vigilant.png"
                     alt="Sentinel AI Server Infrastructure"
                 />
 
